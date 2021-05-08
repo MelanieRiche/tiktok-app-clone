@@ -81,6 +81,7 @@ const Home = () => {
                 <MiniCard 
                 key={index}
                 user={notFollowingUser}
+                toggleFollow={userToToggle => setUserToToggle(userToToggle)}
                 />))}
             </div>
           </div>
