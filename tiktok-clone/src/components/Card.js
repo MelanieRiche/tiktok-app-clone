@@ -7,29 +7,29 @@ const Card = ({ user }) => {
       <div className="break" />
         <div className="section">
           <div className="user-info">
-            <img className="user-profile" src="" width={'100%'} alt="Lorem ipsum"/>
+            <img className="user-profile" src={user.avatar} width={'100%'} alt={user.username}/>
             <div>
             <div className="section">
-              <h3 className="bold">Username</h3>
-              <p className="username">Name</p>
-              <p>Date</p>
+              <h3 className="bold">{user.name}</h3>
+              <p className="username">{user.username}</p>
+              <p>{user.timestamp}</p>
             </div> 
-            <p>Caption</p>
+            <p>{user.caption}</p>
             </div>
           </div>
-          <div className="follow-button">
-              Follow
-          </div>
+          {user.button_visible && <div className={user.is_followed? "followed-button" : "follow-button"}>
+            {user.is_followed? "Following" : "Follow"}
+          </div>}
         </div>
         <video className="video" controls>
-          <source src="" type="video/mp4" />
+          <source src={user.video} type="video/mp4" />
         </video>
         <div className="section socials">
-           <i class="far fa-heart"></i>
-          <div className="social-tag">120</div>
-          <i class="far fa-comment-dots"></i>
-          <div className="social-tag">21</div>
-          <i class="far fa-share-square"></i>
+           <i className="far fa-heart"></i>
+          <div className="social-tag">{user.likes}</div>
+          <i className="far fa-comment-dots"></i>
+          <div className="social-tag">{user.comments}</div>
+          <i className="far fa-share-square"></i>
         </div>
     </div>
   )
