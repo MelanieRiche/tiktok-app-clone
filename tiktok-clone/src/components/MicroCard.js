@@ -1,12 +1,13 @@
 import React from 'react'
 
-const MicroCard = () => {
+const MicroCard = ({ user }) => {
+
   return (
     <div className="section microcard">
-      <img className="user-profile" src="https://i.imgur.com/jONHmE5.png" width={'100%'} alt="Lorem ipsum"/>
+      <img className="user-profile" src={user.avatar} width={'100%'} alt={user.username}/>
       <div>
-        <h3 className="bold">Username</h3>
-        <p>Name</p>
+        <h3 className="bold">{user.name}</h3>
+        <p>{user.username}</p>
       </div>
     </div>
   )

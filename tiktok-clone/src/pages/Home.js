@@ -7,6 +7,8 @@ import axios from 'axios'
 const Home = () => {
   const [users, setUsers] = useState(null)
   let descendingUsers
+  let topFiveFollowing
+  let topFiveNotFollowing
 
   const addData = async () => {
     await axios.post('/.netlify/functions/addData')
@@ -26,14 +28,26 @@ const Home = () => {
   // Sorting posts by id
   if ( users ) {
     descendingUsers = users.sort((a,b) => a.id < b.id ? 1 : -1)
+
+    // For "Your top accounts" - microcard
+    const following = users.filter(user => user.is_followed)
+    const descendingFollowing = following.sort((a,b) => a.likes < b.likes ? 1 : -1)
+    topFiveFollowing =  descendingFollowing.slice(0,5)
+
+    // For "suggested accounts" - minicard
+    const notFollowing = users.filter(user => user.is_followed)
+    const descendingNotFollowing = notFollowing.sort((a,b) => a.likes < b.likes ? 1 : -1)
+    topFiveNotFollowing =  descendingNotFollowing.slice(0,5)
   }
-  console.log(descendingUsers)
+
+  // console.log(descendingUsers)
+  // console.log(topFiveFollowing)
 
   return (
     <>
     { descendingUsers && (
       <div className='container'>
-        <FollowersColumn />
+        <FollowersColumn users={topFiveFollowing} />
         <div className='feed'>
           {descendingUsers.map((descendingUser, index) => (
             <Card 
@@ -47,7 +61,11 @@ const Home = () => {
             <div className="suggested">
               <h2 className="bold">Suggested accounts</h2>
               <div className="break" />
-                <MiniCard />
+              {topFiveNotFollowing.map((notFollowingUser, index) => (
+                <MiniCard 
+                key={index}
+                user={notFollowingUser}
+                />))}
             </div>
           </div>
         </div>

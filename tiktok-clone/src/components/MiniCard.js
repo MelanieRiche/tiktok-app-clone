@@ -1,19 +1,19 @@
 
 import React from 'react'
 
-const MiniCard = () => {
+const MiniCard = ({ user }) => {
   return (
     <div className="section minicard">
       <div className="section">
-        <img className="user-profile" src="https://i.imgur.com/jONHmE5.png" width={'100%'} alt="Lorem ipsum"/>
+        <img className="user-profile" src={user.avatar} width={'100%'} alt={user.username}/>
         <div>
-          <h3 className="bold">Username</h3>
-          <p>Name</p>
+          <h3 className="bold">{user.username}</h3>
+          <p>{user.name}</p>
       </div>
     </div>
-      <div className="follow-button">
-        Follow
-      </div>
+    {user.button_visible && <div className={user.is_followed? "followed-button" : "follow-button"}>
+      {user.is_followed? "Following" : "Follow"}
+    </div>}
     </div>
   )
 }
