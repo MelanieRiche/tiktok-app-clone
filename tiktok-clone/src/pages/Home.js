@@ -6,9 +6,12 @@ import axios from 'axios'
 
 const Home = () => {
   const [users, setUsers] = useState(null)
+  const [userToToggle, setUserToToggle] = useState(null)
   let descendingUsers
   let topFiveFollowing
   let topFiveNotFollowing
+
+  console.log('userToToggle', userToToggle)
 
   const addData = async () => {
     await axios.post('/.netlify/functions/addData')
@@ -18,6 +21,18 @@ const Home = () => {
     const results = await axios.get('/.netlify/functions/posts')
     // console.log(results.data)
     setUsers(results.data)
+  }
+
+  if (userToToggle) {
+    const newValue = userToToggle.is_followed ? false : true
+    const data = {is_followed: newValue}
+
+    axios.put('/.netlify/functions/edit', {userId: userToToggle.id, data: data})
+    .then(res => res.json())
+    .then(json => console.log(json))
+    .catch(err => console.error('error:' + err))
+    .then(() => fetchData())
+     setUserToToggle(null)
   }
 
   useEffect(() => {
@@ -53,6 +68,7 @@ const Home = () => {
             <Card 
             key={index}
             user={descendingUser}
+            toggleFollow={userToToggle => setUserToToggle(userToToggle)}
             />
           ))}
         </div>

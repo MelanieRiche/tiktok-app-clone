@@ -1,7 +1,7 @@
 import React from 'react'
 
-const Card = ({ user }) => {
-    console.log('user', user)
+const Card = ({ user, toggleFollow }) => {
+    // console.log('user', user)
   return (
     <div className="card">
       <div className="break" />
@@ -17,7 +17,9 @@ const Card = ({ user }) => {
             <p>{user.caption}</p>
             </div>
           </div>
-          {user.button_visible && <div className={user.is_followed? "followed-button" : "follow-button"}>
+          {user.button_visible && <div className={user.is_followed? "followed-button" : "follow-button"}
+          onClick={() => toggleFollow(user)}
+          >
             {user.is_followed? "Following" : "Follow"}
           </div>}
         </div>
