@@ -11,18 +11,21 @@ const Home = () => {
   let topFiveFollowing
   let topFiveNotFollowing
 
-  console.log('userToToggle', userToToggle)
+  // console.log('userToToggle', userToToggle)
 
+  // Automatically getting data
   const addData = async () => {
     await axios.post('/.netlify/functions/addData')
   }
 
+  // Fetch all the posts into my feed
   const fetchData = async () => {
     const results = await axios.get('/.netlify/functions/posts')
     // console.log(results.data)
     setUsers(results.data)
   }
-
+  
+  // Toggle button func followed to unfollowed
   if (userToToggle) {
     const newValue = userToToggle.is_followed ? false : true
     const data = {is_followed: newValue}

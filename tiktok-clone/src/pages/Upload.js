@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import faker from 'faker'
-
+import Axios from 'axios'
 
 const Upload = () => {
   const username = 'rchmelanie'
@@ -12,7 +12,7 @@ const Upload = () => {
   const [video, setVideo] = useState(null)
   const [caption, setCaption] = useState(null)
 
-  console.log(caption)
+  // console.log(caption)
 
   const data = {
     id: id,
@@ -28,8 +28,17 @@ const Upload = () => {
     button_visible: false,
   }
   
+  // Handling Form Submit
   const handleSubmit = async (e) => {
     e.preventDefault()
+
+    Axios.post('/.netlify/functions/add', data)
+      .then((response) => {
+        console.log(response)
+      })
+      .catch((err) => {
+        console.error(err)
+      })
   }
 
   return (

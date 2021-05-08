@@ -1,7 +1,12 @@
 import React from 'react'
 
 const Card = ({ user, toggleFollow }) => {
-    // console.log('user', user)
+  // console.log('user', user)
+
+  // Formatting timestamp
+  const timestamp = user.timestamp 
+  const timeStampReformat = timestamp.slice(2, 7)
+
   return (
     <div className="card">
       <div className="break" />
@@ -12,7 +17,7 @@ const Card = ({ user, toggleFollow }) => {
             <div className="section">
               <h3 className="bold">{user.name}</h3>
               <p className="username">{user.username}</p>
-              <p>{user.timestamp}</p>
+              <p>{timeStampReformat}</p>
             </div> 
             <p>{user.caption}</p>
             </div>

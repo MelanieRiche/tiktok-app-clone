@@ -1,4 +1,5 @@
 const { createClient } = require("@astrajs/collections");
+const faker = require("faker")
 
 const collection = 'tiktokposts'
 let id = faker.random.uuid()
@@ -14,11 +15,10 @@ exports.handler = async function(event, context, callback) {
     const users = astraClient
         .namespace(process.env.ASTRA_DB_APPLICATION_KEYSPACE)
         .collection(collection)
+        // console.log(event)
        
     try {
-        const user = await users.create(id, {
-
-        })
+        const user = await users.create(id, event.body)
         return {
             statusCode: 200,
         };
