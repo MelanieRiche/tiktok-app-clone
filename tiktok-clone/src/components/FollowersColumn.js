@@ -1,9 +1,25 @@
+import React from 'react'
+import MicroCard from '../components/MicroCard'
+
 const FollowersColumn = () => {
-    return (
-      <div className="followers-column">
-          <h1>FollowersColumn</h1>
+
+  return (
+    <div className="followers-column">
+      <div className="followers-section">
+        <div className="home" />
+        <h2 className="bold red">For You</h2>
       </div>
-    );
-  }
-  
-  export default FollowersColumn;
+      <div className="followers-section">
+        <div className="following" />
+        <h2>Following</h2>
+      </div>
+      <hr />
+      <p>Your top accounts</p>
+      <MicroCard />
+      <MicroCard />
+      <hr />
+    </div>
+  )
+}
+
+export default FollowersColumn
