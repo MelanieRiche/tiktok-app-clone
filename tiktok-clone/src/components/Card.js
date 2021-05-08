@@ -1,13 +1,13 @@
 import React from 'react'
 
-const Card = () => {
-
+const Card = ({ user }) => {
+    console.log('user', user)
   return (
     <div className="card">
       <div className="break" />
         <div className="section">
           <div className="user-info">
-            <img className="user-profile" src="https://i.imgur.com/jONHmE5.png" width={'100%'} alt="Lorem ipsum"/>
+            <img className="user-profile" src="" width={'100%'} alt="Lorem ipsum"/>
             <div>
             <div className="section">
               <h3 className="bold">Username</h3>
@@ -22,7 +22,7 @@ const Card = () => {
           </div>
         </div>
         <video className="video" controls>
-          <source src="https://i.imgur.com/H9UX0Jm.mp4" type="video/mp4" />
+          <source src="" type="video/mp4" />
         </video>
         <div className="section socials">
            <i class="far fa-heart"></i>
