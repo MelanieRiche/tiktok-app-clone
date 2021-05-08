@@ -1,6 +1,6 @@
 const { createClient } = require("@astrajs/collections");
 
-const collection = 'posts'
+const collection = 'tiktokposts'
 
 exports.handler = async function(event, context, callback) {
     // create an Astra client
@@ -12,17 +12,17 @@ exports.handler = async function(event, context, callback) {
 
     const posts = astraClient
     .namespace(process.env.ASTRA_DB_APPLICATION_KEYSPACE)
-    .collection(collection)
+    .collection(collection);
 
     try {
-        const res = await posts.find()
+        const res = await posts.find();
 
           return {
             statusCode: 200,
-            body: JSON.stringify(res)
-        }
+            body: JSON.stringify(Object.keys(res).map((i) => res[i])),
+        };
     } catch (e) {
-        console.error(e)
+        console.error(e);
         return {
             statusCode: 500,
             body: JSON.stringify(e)
